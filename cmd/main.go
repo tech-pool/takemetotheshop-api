@@ -21,7 +21,7 @@ type ServerMessage struct {
 func main() {
 	http.HandleFunc("/health", healthHandler)
 	http.HandleFunc("/", handler)
-	log.Println("Listening on port ", port)
+	log.Println("[main] Listening on port ", port)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
 
