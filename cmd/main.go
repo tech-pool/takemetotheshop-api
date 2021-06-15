@@ -2,20 +2,23 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/tech-pool/takemetotheshop-api/api/registration"
 )
 
-const address string = ":8080"
+var port string
+
+func init() {
+	port = os.Getenv("PORT")
+}
 
 func main() {
 
 	router := setupRouter()
-	router.Run(address)
+	router.Run(port)
 
-	//http.HandleFunc("/registration", registration.Handler)
-	// log.Fatalln(http.ListenAndServe(address, nil))
 }
 
 func setupRouter() *gin.Engine {
