@@ -1,18 +1,12 @@
 package registration
 
 import (
-	"fmt"
-	"net/http"
+	"github.com/gin-gonic/gin"
 )
 
-func Handler(w http.ResponseWriter, r *http.Request) {
+func Handler(c *gin.Context) {
+	c.JSON(200, map[string]interface{}{
+		"message": "Hello Registration",
+	})
 
-	fmt.Fprintf(w, "%s s-print %q q-print %v v-print \n", "Hello Registration", "Hallo Registration", "Hola Registration")
-
-	fmt.Fprintf(w, "URL.Path is: %q\n", r.URL.Path)
-	fmt.Fprintf(w, "r.RequestURI is: %s\n", r.RequestURI)
-	fmt.Fprintf(w, "r.URL.Path is: %s\n", r.URL.Path)
-	fmt.Fprintf(w, "r.URL is: %s\n", r.URL)
-	fmt.Fprintf(w, "r.URL.User is: %s\n", r.URL.User)
-	fmt.Fprintf(w, "r.URL.Host is: %s\n", r.URL.Host)
 }
