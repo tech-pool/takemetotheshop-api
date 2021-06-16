@@ -8,10 +8,17 @@ import (
 	"github.com/tech-pool/takemetotheshop-api/api/registration"
 )
 
+// to be put in a config file
+const default_address string = ":8080"
+
 var port string
 
 func init() {
-	port = os.Getenv("PORT")
+	port = os.Getenv("TECHSHOP_PORT")
+
+	if port == "" {
+		port = default_address
+	}
 }
 
 func main() {
