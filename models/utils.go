@@ -1,6 +1,7 @@
 package models
 
 import (
+	"bytes"
 	"encoding/base32"
 	"encoding/json"
 	"fmt"
@@ -13,6 +14,8 @@ import (
 	"strings"
 	"time"
 	"unicode"
+
+	"github.com/google/uuid"
 )
 
 type StringInterface map[string]interface{}
@@ -72,14 +75,15 @@ var encoding = base32.NewEncoding("ybndrfg8ejkmcpqxot1uwisza345h769")
 // NewId is a globally unique identifier.  It is a [A-Z0-9] string 26 characters long.
 // It is a UUID version 4 Guid that is zbased32 encoded with the padding stripped off.
 func NewId() string {
-	/*
-		var b bytes.Buffer
-		encoder := base32.NewEncoder(encoding, &b)
-		encoder.Write(uuid.NewRandom())
-		encoder.Close()
-		b.Truncate(26) // removes the '==' padding
-		return b.String()
-	*/
+
+	var b bytes.Buffer
+	encoder := base32.NewEncoder(encoding, &b)
+	var randomId, _ = uuid.NewRandom()
+	encoder.Write([]byte(randomId.String()))
+	encoder.Close()
+	b.Truncate(26) // removes the '==' padding
+	return b.String()
+
 }
 
 // GetMillis is a convenience method to get milliseconds since epoch.
